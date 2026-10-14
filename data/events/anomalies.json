@@ -1,0 +1,34 @@
+{
+	"stages": {
+		"0": { "name": "Comfort", "anomalies": [] },
+		"1": {
+			"name": "Oddity",
+			"anomalies": [
+				{ "id": "hum_repeat", "flag": "anomaly_humming", "message": "The sky hums. It is the same note as before." },
+				{ "id": "hum_gloom", "flag": "anomaly_humming", "variant": "gloom", "message": "The sky hums from very far away, as if buried." },
+				{ "id": "hum_storm", "flag": "anomaly_humming", "variant": "storm", "message": "The sky hums flat and low, like a held breath." }
+			]
+		},
+		"2": {
+			"name": "Suspicion",
+			"anomalies": [
+				{ "id": "world_unstable", "flag": "world_unstable", "message": "The light flickers, as if remembering a different afternoon." },
+				{ "id": "roots_drift", "flag": "hollow_whispers", "message": "Beneath the village, something is being carried back again." }
+			]
+		},
+		"3": {
+			"name": "Pressure",
+			"anomalies": [
+				{ "id": "restart_whisper", "flag": "restart_offered", "message": "It would be easy to begin again. No one would mind." }
+			]
+		},
+		"4": {
+			"name": "Confrontation",
+			"anomalies": [
+				{ "id": "game_speaks", "flag": "game_speaks", "message": "You already know this is not the first time." },
+				{ "id": "fern_watches", "flag": "fern_looking", "message": "Fern has watched you arrive more than once." }
+			]
+		},
+		"5": { "name": "Resolution", "anomalies": [] }
+	}
+}

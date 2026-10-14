@@ -1,0 +1,13 @@
+{
+	"id": "memory_echo",
+	"name": "Memory Echo",
+	"description": "Hear what a place used to be, and let it rest.",
+	"cost": 1,
+	"requires_trap": true,
+	"requires_discovered_trap": true,
+	"effects": [
+		{ "type": "trap", "trap": "@active", "action": "resolve", "resolution": "remembered" },
+		{ "type": "flag", "flag": "returning_tree_remembered", "value": true },
+		{ "type": "meta", "record_anomaly": "memory_echo_used" }
+	]
+}

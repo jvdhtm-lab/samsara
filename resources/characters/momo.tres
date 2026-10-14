@@ -1,0 +1,28 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/domain/character_data.gd" id="1_data"]
+
+[resource]
+script = ExtResource("1_data")
+id = &"momo"
+display_name = "Momo"
+role = "The Unsettling One"
+personality = "Sweet and affectionate, but occasionally says things that feel subtly wrong."
+dialogue_style = "Cheerful and doting, with a pause before answers that should be easy."
+dialogue_id = &"momo_intro"
+idle_motion = &"uncanny_idle"
+uneven_smile = true
+silhouette = 2
+accessory = 2
+marking = 3
+eye_shape = 2
+body_color = Color(1, 0.769, 0.69, 1)
+shade_color = Color(0.878, 0.537, 0.455, 1)
+face_color = Color(1, 0.949, 0.925, 1)
+eye_color = Color(0.478, 0.29, 0.227, 1)
+accent_color = Color(0.42, 0.29, 0.227, 1)
+body_radius = 17.0
+palette_name = "Peach / button-brown"
+footprint = 11.0
+model_id = "chars/minion-c01"
+model_yaw = 180.0

@@ -1,0 +1,38 @@
+; Engine configuration file.
+; Samsara: Eternal Restart
+; Generated as part of Phase 1 (Project Foundation).
+
+config_version=5
+
+[application]
+
+config/name="Samsara: Eternal Restart"
+config/description="A whimsical, surreal narrative about attachment, timelines, and the temptation to restart a universe."
+run/main_scene="res://scenes/boot/boot.tscn"
+config/features=PackedStringArray("4.5", "Forward Plus")
+config/icon="res://icon.svg"
+
+[autoload]
+
+Game="*res://scripts/application/game.gd"
+EventBus="*res://scripts/infrastructure/event_bus.gd"
+SaveManager="*res://scripts/infrastructure/save_manager.gd"
+AudioManager="*res://scripts/infrastructure/audio_manager.gd"
+
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=360
+window/size/window_width_override=1280
+window/size/window_height_override=720
+window/stretch/mode="canvas_items"
+window/stretch/aspect="keep"
+
+[rendering]
+
+renderer/rendering_method="forward_plus"
+renderer/rendering_method.mobile="mobile"
+scaling_3d/scale=1.5
+lights_and_shadows/directional_shadow/size=4096
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=3
+textures/canvas_textures/default_texture_filter=0

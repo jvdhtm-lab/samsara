@@ -1,0 +1,85 @@
+{
+	"id": "momo_intro",
+	"speaker": "momo",
+	"speaker_name": "Momo",
+	"start": "start",
+	"nodes": {
+		"start": {
+			"routes": [
+				{ "condition": { "type": "flag", "flag": "momo_picnic_done", "equals": true }, "next": "after_picnic" },
+				{ "condition": { "type": "all", "conditions": [
+					{ "type": "objective", "quest": "momo_picnic", "objective": "gather_flower", "done": true },
+					{ "type": "objective", "quest": "momo_picnic", "objective": "accept_invite", "done": true }
+				] }, "next": "finish_picnic" },
+				{ "condition": { "type": "flag", "flag": "asked_momo_time", "equals": true }, "next": "guarded" },
+				{ "next": "warm_open" }
+			]
+		},
+		"warm_open": {
+			"lines": [
+				{ "text": "There you are, sweet thing! I kept a seat warm for you.", "expression": "happy" },
+				"I have been thinking about you a lot. More than usual. Much more.",
+				{ "text": "Does that feel strange? It feels a little strange to me too.", "expression": "uncanny" }
+			],
+			"choices": [
+				{
+					"text": "That is kind of you, Momo.",
+					"next": "warm_reply",
+					"effects": [
+						{ "type": "relationship", "character": "momo", "attr": "affection", "delta": 1 },
+						{ "type": "quest", "quest": "momo_picnic", "action": "start" },
+						{ "type": "quest", "quest": "momo_picnic", "action": "objective", "objective": "accept_invite" }
+					]
+				},
+				{
+					"text": "How long have I been here?",
+					"next": "question_reply",
+					"effects": [
+						{ "type": "relationship", "character": "momo", "attr": "suspicion", "delta": 1 },
+						{ "type": "flag", "flag": "asked_momo_time", "value": true },
+						{ "type": "meta", "record_anomaly": "momo_time_question" }
+					]
+				}
+			]
+		},
+		"warm_reply": {
+			"lines": [
+				{ "text": "Then it is settled. Bring me a flower from the garden.", "expression": "happy" },
+				"Any flower. I will know the one you mean."
+			],
+			"choices": []
+		},
+		"question_reply": {
+			"lines": [
+				"...",
+				{ "text": "A while. A long, warm, lovely while.", "expression": "uncanny" },
+				"Please do not ask me that again, sweet thing."
+			],
+			"choices": []
+		},
+		"guarded": {
+			"lines": [
+				{ "text": "You asked me that already, sweet thing.", "expression": "uncanny" },
+				"I gave you an answer. I would like to keep it the same answer."
+			],
+			"choices": []
+		},
+		"finish_picnic": {
+			"lines": [
+				{ "text": "Oh, you brought one! It is perfect. Sit, sit.", "expression": "happy" },
+				"We will be happy here. We will be happy here for as long as it lasts.",
+				{ "text": "For as long as it lasts. Yes. That is a nice way to put it.", "expression": "uncanny" }
+			],
+			"effects": [
+				{ "type": "quest", "quest": "momo_picnic", "action": "objective", "objective": "share_picnic" }
+			],
+			"choices": []
+		},
+		"after_picnic": {
+			"lines": [
+				{ "text": "You kept the seat warm by coming back. That is the whole trick, you know.", "expression": "happy" }
+			],
+			"choices": []
+		}
+	}
+}

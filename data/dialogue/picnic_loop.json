@@ -1,0 +1,136 @@
+{
+	"id": "picnic_loop",
+	"speaker": "momo",
+	"speaker_name": "Momo",
+	"start": "start",
+	"nodes": {
+		"start": {
+			"routes": [
+				{ "condition": { "type": "flag", "flag": "picnic_rule_known", "equals": true }, "next": "discovered" },
+				{ "condition": { "type": "trap_iteration", "trap": "endless_picnic", "min": 3 }, "next": "late" },
+				{ "condition": { "type": "trap_iteration", "trap": "endless_picnic", "min": 2 }, "next": "mid" },
+				{ "next": "first" }
+			]
+		},
+		"first": {
+			"lines": [
+				{ "text": "Sit, sweet thing! I saved you the best seat.", "expression": "happy" },
+				"There is so much food. There is always so much food."
+			],
+			"choices": [
+				{ "text": "Sit down.", "next": "sit" },
+				{ "text": "Look around.", "next": "look" }
+			]
+		},
+		"mid": {
+			"lines": [
+				{ "text": "You are back! Sit, sit. The food is still warm.", "expression": "happy" },
+				{ "text": "Was it always this many plates? Never mind. Eat.", "expression": "uncanny" }
+			],
+			"choices": [
+				{ "text": "Sit down.", "next": "sit" },
+				{ "text": "Look around.", "next": "look" }
+			]
+		},
+		"late": {
+			"lines": [
+				{ "text": "Sit, sweet thing. We have done this before. We will do it again.", "expression": "uncanny" },
+				{ "text": "I set a place for you. I always set a place for you.", "expression": "uncanny" }
+			],
+			"choices": [
+				{ "text": "Something is wrong.", "next": "realize" },
+				{ "text": "Sit down again.", "next": "sit" }
+			]
+		},
+		"realize": {
+			"lines": [
+				{ "text": "Wrong? Nothing is wrong. The picnic is perfect. It is always perfect.", "expression": "afraid" },
+				"It only keeps going because you keep sitting down. That is the whole rule."
+			],
+			"effects": [
+				{ "type": "trap", "trap": "endless_picnic", "action": "discover" },
+				{ "type": "flag", "flag": "picnic_rule_known", "value": true },
+				{ "type": "meta", "record_anomaly": "endless_picnic" }
+			],
+			"next": "discovered"
+		},
+		"discovered": {
+			"lines": [
+				{ "text": "...You noticed. You always notice, eventually.", "expression": "afraid" },
+				"You can walk to the edge of the garden. Or you can refuse me.",
+				"Or -- if Pip lent you his trick -- you can freeze the moment."
+			],
+			"choices": [
+				{
+					"text": "I'm leaving.",
+					"next": "walked",
+					"effects": [
+						{ "type": "trap", "trap": "endless_picnic", "action": "resolve", "resolution": "walked_away" },
+						{ "type": "relationship", "character": "momo", "attr": "affection", "delta": 1 },
+						{ "type": "flag", "flag": "picnic_walked_away", "value": true }
+					]
+				},
+				{
+					"text": "This isn't real. I won't play along.",
+					"next": "refused",
+					"effects": [
+						{ "type": "trap", "trap": "endless_picnic", "action": "resolve", "resolution": "refused" },
+						{ "type": "relationship", "character": "momo", "attr": "trust", "delta": 1 },
+						{ "type": "flag", "flag": "picnic_refused", "value": true }
+					]
+				},
+				{
+					"text": "Freeze the moment. (Temporal Pause)",
+					"next": "frozen",
+					"condition": { "type": "all", "conditions": [
+						{ "type": "ability", "ability": "temporal_pause" },
+						{ "type": "focus", "min": 1 }
+					] },
+					"effects": [
+						{ "type": "focus", "delta": -1 },
+						{ "type": "trap", "trap": "endless_picnic", "action": "resolve", "resolution": "frozen" },
+						{ "type": "relationship", "character": "momo", "attr": "affection", "delta": 1 },
+						{ "type": "flag", "flag": "picnic_frozen", "value": true },
+						{ "type": "meta", "record_anomaly": "temporal_pause_used" }
+					]
+				}
+			]
+		},
+		"frozen": {
+			"lines": [
+				"You freeze the moment. The picnic holds, mid-breath.",
+				{ "text": "Momo blinks, slowly, and does not start again.", "expression": "surprised" },
+				"You step out of the garden before time remembers how to move."
+			],
+			"choices": []
+		},
+		"sit": {
+			"lines": [
+				"Good. Good. Let us begin again."
+			],
+			"choices": []
+		},
+		"look": {
+			"lines": [
+				"The jam is always the same jam. The tea is always the same tea.",
+				"You could look more closely at the tea set, if you like."
+			],
+			"choices": []
+		},
+		"walked": {
+			"lines": [
+				{ "text": "Oh. You are going.", "expression": "sad" },
+				"That is allowed. That is the whole point, sweet thing."
+			],
+			"choices": []
+		},
+		"refused": {
+			"lines": [
+				{ "text": "...", "expression": "uncanny" },
+				{ "text": "Then we will not play. Not today.", "expression": "sad" },
+				"Thank you for telling me the truth. I will remember that you did."
+			],
+			"choices": []
+		}
+	}
+}

@@ -1,0 +1,18 @@
+{
+	"id": "pip_device",
+	"title": "The Stubborn Minute",
+	"giver": "pip",
+	"summary": "Pip's measuring device keeps repeating the same minute. Look at it in the workshop and report what you find.",
+	"objectives": [
+		{ "id": "talk_pip", "description": "Ask Pip about the device" },
+		{ "id": "examine_device", "description": "Examine the device in Pip's workshop" },
+		{ "id": "return_pip", "description": "Tell Pip what you found" }
+	],
+	"rewards": [
+		{ "type": "relationship", "character": "pip", "attr": "trust", "delta": 1 },
+		{ "type": "meta", "unlock_ability": "temporal_pause" }
+	],
+	"consequences": [
+		{ "type": "flag", "flag": "pip_quest_done", "value": true }
+	]
+}

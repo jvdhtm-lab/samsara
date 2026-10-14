@@ -1,0 +1,28 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/domain/character_data.gd" id="1_data"]
+
+[resource]
+script = ExtResource("1_data")
+id = &"fern"
+display_name = "Fern"
+role = "The Quiet Warden"
+personality = "Patient and watchful, more at home with roots than with people."
+dialogue_style = "Slow, grounded, and careful with every word."
+dialogue_id = &"fern_intro"
+idle_motion = &"idle"
+uneven_smile = false
+silhouette = 2
+accessory = 3
+marking = 0
+eye_shape = 1
+body_color = Color(0.86, 0.72, 0.42, 1)
+shade_color = Color(0.66, 0.51, 0.27, 1)
+face_color = Color(1, 0.96, 0.87, 1)
+eye_color = Color(0.32, 0.4, 0.24, 1)
+accent_color = Color(0.45, 0.62, 0.4, 1)
+body_radius = 13.0
+palette_name = "Amber / moss"
+footprint = 9.0
+model_id = "chars/minion-d01"
+model_yaw = 180.0

@@ -1,0 +1,82 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://scripts/presentation/area_controller.gd" id="1_area"]
+[ext_resource type="Script" path="res://scripts/presentation/workshop_background.gd" id="2_bg"]
+[ext_resource type="PackedScene" path="res://scenes/characters/player.tscn" id="3_player"]
+[ext_resource type="Script" path="res://scripts/presentation/door.gd" id="4_door"]
+[ext_resource type="Script" path="res://scripts/presentation/prop.gd" id="5_prop"]
+[ext_resource type="Script" path="res://scripts/presentation/sign.gd" id="6_sign"]
+[ext_resource type="Script" path="res://scripts/systems/spawn_point.gd" id="7_spawn"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="8_hud"]
+[ext_resource type="PackedScene" path="res://scenes/dialogue/dialogue_box.tscn" id="9_dlg"]
+[ext_resource type="Script" path="res://scripts/presentation/secret_find.gd" id="10_secret"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_prop"]
+size = Vector2(26, 28)
+
+[node name="Workshop" type="Node2D"]
+script = ExtResource("1_area")
+location_id = &"workshop"
+bounds = Rect2(60, 120, 520, 190)
+music_id = &"workshop"
+ambience_id = &"workshop_hum"
+
+[node name="Background" type="Node2D" parent="."]
+script = ExtResource("2_bg")
+
+[node name="Player" parent="." instance=ExtResource("3_player")]
+position = Vector2(320, 240)
+
+[node name="SpawnDefault" type="Node2D" parent="."]
+position = Vector2(320, 240)
+script = ExtResource("7_spawn")
+
+[node name="Device" type="Area2D" parent="."]
+position = Vector2(220, 214)
+script = ExtResource("5_prop")
+kind = 2
+tint = Color(0.788, 0.839, 0.871, 1)
+lines = PackedStringArray("Pip's measuring device.", "Its hand is stuck one minute before noon.", "It ticks. Then it un-ticks.")
+quest_id = &"pip_device"
+objective_id = &"examine_device"
+
+[node name="Shape" type="CollisionShape2D" parent="Device"]
+shape = SubResource("RectangleShape2D_prop")
+
+[node name="WorkshopSign" type="Area2D" parent="."]
+position = Vector2(440, 206)
+script = ExtResource("6_sign")
+speaker_label = "Workshop Plaque"
+lines = PackedStringArray("PIP'S WORKSHOP.", "Measurement is a matter of trust.")
+
+[node name="Shape" type="CollisionShape2D" parent="WorkshopSign"]
+shape = SubResource("RectangleShape2D_prop")
+
+[node name="ExitDoor" type="Area2D" parent="."]
+position = Vector2(320, 296)
+script = ExtResource("4_door")
+target_scene = "res://scenes/world/village.tscn"
+target_spawn = &"from_workshop"
+prompt_text = "Leave"
+
+[node name="Shape" type="CollisionShape2D" parent="ExitDoor"]
+shape = SubResource("RectangleShape2D_prop")
+
+[node name="LoosePanel" type="Area2D" parent="."]
+position = Vector2(420, 266)
+script = ExtResource("10_secret")
+grant_flag = &"cellar_key"
+found_flag = &"found_cellar_key"
+discovery_id = "found_cellar_key"
+speaker_label = "Loose Floorboard"
+prompt = "Pry it open"
+variation_slots = 2
+variation_slot = 0
+lines = PackedStringArray("A floorboard sits a little proud of the rest.", "Wedged beneath it is a small brass key, warm to the touch.", "It fits a door you have not opened yet.")
+
+[node name="Shape" type="CollisionShape2D" parent="LoosePanel"]
+shape = SubResource("RectangleShape2D_prop")
+
+[node name="HUD" parent="." instance=ExtResource("8_hud")]
+
+[node name="DialogueBox" parent="." instance=ExtResource("9_dlg")]

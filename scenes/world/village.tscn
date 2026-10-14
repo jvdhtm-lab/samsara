@@ -1,0 +1,164 @@
+[gd_scene load_steps=17 format=3]
+
+[ext_resource type="Script" path="res://scripts/presentation/area_controller.gd" id="1_area"]
+[ext_resource type="Script" path="res://scripts/presentation/world_background.gd" id="2_bg"]
+[ext_resource type="PackedScene" path="res://scenes/characters/player.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://scenes/characters/character_base.tscn" id="4_char"]
+[ext_resource type="Resource" path="res://resources/characters/lumi.tres" id="5_lumi"]
+[ext_resource type="Resource" path="res://resources/characters/pip.tres" id="6_pip"]
+[ext_resource type="Resource" path="res://resources/characters/momo.tres" id="7_momo"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="8_hud"]
+[ext_resource type="PackedScene" path="res://scenes/dialogue/dialogue_box.tscn" id="9_dlg"]
+[ext_resource type="Script" path="res://scripts/presentation/sign.gd" id="10_sign"]
+[ext_resource type="Script" path="res://scripts/presentation/prop.gd" id="11_prop"]
+[ext_resource type="Script" path="res://scripts/presentation/door.gd" id="12_door"]
+[ext_resource type="Script" path="res://scripts/systems/spawn_point.gd" id="13_spawn"]
+[ext_resource type="Script" path="res://scripts/presentation/ending_trigger.gd" id="14_trigger"]
+[ext_resource type="Script" path="res://scripts/presentation/secret_find.gd" id="15_secret"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_prop"]
+size = Vector2(26, 28)
+
+[node name="Village" type="Node2D"]
+script = ExtResource("1_area")
+location_id = &"village"
+bounds = Rect2(60, 60, 780, 520)
+music_id = &"village"
+ambience_id = &"village_wind"
+
+[node name="Background" type="Node2D" parent="."]
+script = ExtResource("2_bg")
+
+[node name="Lumi" parent="." instance=ExtResource("4_char")]
+position = Vector2(300, 214)
+data = ExtResource("5_lumi")
+
+[node name="Pip" parent="." instance=ExtResource("4_char")]
+position = Vector2(186, 232)
+data = ExtResource("6_pip")
+
+[node name="Momo" parent="." instance=ExtResource("4_char")]
+position = Vector2(452, 232)
+data = ExtResource("7_momo")
+
+[node name="Player" parent="." instance=ExtResource("3_player")]
+position = Vector2(320, 262)
+
+[node name="SpawnDefault" type="Node2D" parent="."]
+position = Vector2(320, 262)
+script = ExtResource("13_spawn")
+
+[node name="SpawnFromWorkshop" type="Node2D" parent="."]
+position = Vector2(240, 274)
+script = ExtResource("13_spawn")
+spawn_id = &"from_workshop"
+
+[node name="VillageSign" type="Area2D" parent="."]
+position = Vector2(398, 250)
+script = ExtResource("10_sign")
+speaker_label = "Village Sign"
+lines = PackedStringArray("Welcome to the floating village.", "Mind the sky. It remembers more than we do.")
+
+[node name="Shape" type="CollisionShape2D" parent="VillageSign"]
+shape = SubResource("RectangleShape2D_prop")
+
+[node name="TreeSign" type="Area2D" parent="."]
+position = Vector2(120, 246)
+script = ExtResource("10_sign")
+speaker_label = "Carved Plaque"
+lines = PackedStringArray("The tree has always been here.", "The tree has always been here.", "The tree has always been...")
+quest_id = &"lumi_story"
+objective_id = &"read_plaque"
+
+[node name="Shape" type="CollisionShape2D" parent="TreeSign"]
+shape = SubResource("RectangleShape2D_prop")
+
+[node name="Crate" type="Area2D" parent="."]
+position = Vector2(96, 252)
+script = ExtResource("11_prop")
+kind = 0
+tint = Color(0.851, 0.725, 0.541, 1)
+lines = PackedStringArray("A crate of lantern oil.", "Someone has counted it three times.")
+
+[node name="Shape" type="CollisionShape2D" parent="Crate"]
+shape = SubResource("RectangleShape2D_prop")
+
+[node name="CrateNook" type="Area2D" parent="."]
+position = Vector2(150, 262)
+script = ExtResource("15_secret")
+grant_flag = &"cellar_key"
+found_flag = &"found_cellar_key"
+discovery_id = "found_cellar_key"
+speaker_label = "Old Crate Lid"
+prompt = "Lift the lid"
+variation_slots = 2
+variation_slot = 1
+lines = PackedStringArray("An old crate, its lid askew.", "Beneath a fold of sacking: a small brass key.", "Someone meant it to be found. Eventually.")
+
+[node name="Shape" type="CollisionShape2D" parent="CrateNook"]
+shape = SubResource("RectangleShape2D_prop")
+
+[node name="Flower" type="Area2D" parent="."]
+position = Vector2(540, 252)
+script = ExtResource("11_prop")
+kind = 1
+tint = Color(1, 0.561, 0.639, 1)
+lines = PackedStringArray("A stubborn pink flower.", "It turns to face the plaza even at night.")
+quest_id = &"momo_picnic"
+objective_id = &"gather_flower"
+
+[node name="Shape" type="CollisionShape2D" parent="Flower"]
+shape = SubResource("RectangleShape2D_prop")
+
+[node name="WorkshopDoor" type="Area2D" parent="."]
+position = Vector2(240, 252)
+script = ExtResource("12_door")
+target_scene = "res://scenes/world/workshop.tscn"
+target_spawn = &"default"
+
+[node name="Shape" type="CollisionShape2D" parent="WorkshopDoor"]
+shape = SubResource("RectangleShape2D_prop")
+
+[node name="CellarDoor" type="Area2D" parent="."]
+position = Vector2(560, 252)
+script = ExtResource("12_door")
+target_scene = "res://scenes/world/hollow.tscn"
+target_spawn = &"from_cellar"
+initially_unlocked = false
+unlock_flag = &"cellar_key"
+prompt_text = "Descend"
+locked_lines = PackedStringArray("The cellar door is sealed.", "Something behind it is humming the same note as the sky.")
+
+[node name="Shape" type="CollisionShape2D" parent="CellarDoor"]
+shape = SubResource("RectangleShape2D_prop")
+
+[node name="SpawnFromCellar" type="Node2D" parent="."]
+position = Vector2(560, 274)
+script = ExtResource("13_spawn")
+spawn_id = &"from_cellar"
+
+[node name="PicnicDoor" type="Area2D" parent="."]
+position = Vector2(496, 252)
+script = ExtResource("12_door")
+target_scene = "res://scenes/puzzles/endless_picnic.tscn"
+target_spawn = &"default"
+prompt_text = "Enter the garden"
+
+[node name="Shape" type="CollisionShape2D" parent="PicnicDoor"]
+shape = SubResource("RectangleShape2D_prop")
+
+[node name="SpawnFromPicnic" type="Node2D" parent="."]
+position = Vector2(496, 274)
+script = ExtResource("13_spawn")
+spawn_id = &"from_picnic"
+
+[node name="Lantern" type="Area2D" parent="."]
+position = Vector2(360, 246)
+script = ExtResource("14_trigger")
+
+[node name="Shape" type="CollisionShape2D" parent="Lantern"]
+shape = SubResource("RectangleShape2D_prop")
+
+[node name="HUD" parent="." instance=ExtResource("8_hud")]
+
+[node name="DialogueBox" parent="." instance=ExtResource("9_dlg")]

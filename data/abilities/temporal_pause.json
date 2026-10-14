@@ -1,0 +1,13 @@
+{
+	"id": "temporal_pause",
+	"name": "Temporal Pause",
+	"description": "Freeze a repeating moment long enough to step out of it.",
+	"cost": 1,
+	"requires_trap": true,
+	"requires_discovered_trap": true,
+	"effects": [
+		{ "type": "trap", "trap": "@active", "action": "resolve", "resolution": "frozen" },
+		{ "type": "flag", "flag": "picnic_frozen", "value": true },
+		{ "type": "meta", "record_anomaly": "temporal_pause_used" }
+	]
+}

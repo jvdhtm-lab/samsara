@@ -1,0 +1,17 @@
+{
+	"id": "lumi_story",
+	"title": "The Humming Sky",
+	"giver": "lumi",
+	"summary": "Lumi hears a hum in the sky. Follow the clue by the strange tree and tell her what it means.",
+	"objectives": [
+		{ "id": "listen_with_lumi", "description": "Listen to the sky with Lumi" },
+		{ "id": "read_plaque", "description": "Read the plaque by the strange tree" },
+		{ "id": "tell_lumi", "description": "Tell Lumi what the plaque said" }
+	],
+	"rewards": [
+		{ "type": "relationship", "character": "lumi", "attr": "trust", "delta": 1 }
+	],
+	"consequences": [
+		{ "type": "flag", "flag": "lumi_story_done", "value": true }
+	]
+}

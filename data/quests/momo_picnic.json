@@ -1,0 +1,17 @@
+{
+	"id": "momo_picnic",
+	"title": "A Seat Kept Warm",
+	"giver": "momo",
+	"summary": "Momo has set a place for you. Bring a flower from the garden and share the picnic.",
+	"objectives": [
+		{ "id": "accept_invite", "description": "Accept Momo's invitation" },
+		{ "id": "gather_flower", "description": "Pick a flower from the garden" },
+		{ "id": "share_picnic", "description": "Share the picnic with Momo" }
+	],
+	"rewards": [
+		{ "type": "relationship", "character": "momo", "attr": "affection", "delta": 1 }
+	],
+	"consequences": [
+		{ "type": "flag", "flag": "momo_picnic_done", "value": true }
+	]
+}

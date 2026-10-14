@@ -1,0 +1,28 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/domain/character_data.gd" id="1_data"]
+
+[resource]
+script = ExtResource("1_data")
+id = &"player"
+display_name = "The Wanderer"
+role = "The Player"
+personality = "Newly awake, and not yet sure why."
+dialogue_style = "Questioning."
+dialogue_id = &""
+idle_motion = &"idle"
+uneven_smile = false
+silhouette = 0
+accessory = 3
+marking = 0
+eye_shape = 0
+body_color = Color(0.722, 0.878, 0.902, 1)
+shade_color = Color(0.416, 0.639, 0.678, 1)
+face_color = Color(0.949, 0.988, 1, 1)
+eye_color = Color(0.227, 0.353, 0.4, 1)
+accent_color = Color(1, 1, 1, 1)
+body_radius = 15.0
+palette_name = "Pale cyan / cool"
+footprint = 10.0
+model_id = "chars/minion-a02"
+model_yaw = 180.0

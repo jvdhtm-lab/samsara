@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bxgqfgsqr0jae"
+path="res://.godot/imported/board_cutting_board_001.obj-7db348a00f4a5d6f2e9e626a11466908.mesh"
+
+[deps]
+
+files=["res://.godot/imported/board_cutting_board_001.obj-7db348a00f4a5d6f2e9e626a11466908.mesh"]
+
+source_file="res://assets/models/cooking/Cutting Board/board_cutting_board_001.obj"
+dest_files=["res://.godot/imported/board_cutting_board_001.obj-7db348a00f4a5d6f2e9e626a11466908.mesh", "res://.godot/imported/board_cutting_board_001.obj-7db348a00f4a5d6f2e9e626a11466908.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

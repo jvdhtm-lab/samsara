@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://uairyg7meu5p"
+path="res://.godot/imported/cutensils_laddle_2.obj-10b0a3696da6383c0ebefe99d5f57cfa.mesh"
+
+[deps]
+
+files=["res://.godot/imported/cutensils_laddle_2.obj-10b0a3696da6383c0ebefe99d5f57cfa.mesh"]
+
+source_file="res://assets/models/cooking/Laddle/cutensils_laddle_2.obj"
+dest_files=["res://.godot/imported/cutensils_laddle_2.obj-10b0a3696da6383c0ebefe99d5f57cfa.mesh", "res://.godot/imported/cutensils_laddle_2.obj-10b0a3696da6383c0ebefe99d5f57cfa.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

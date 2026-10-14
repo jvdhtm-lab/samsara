@@ -1,0 +1,84 @@
+{
+	"id": "pip_intro",
+	"speaker": "pip",
+	"speaker_name": "Pip",
+	"start": "start",
+	"nodes": {
+		"start": {
+			"routes": [
+				{ "condition": { "type": "flag", "flag": "pip_quest_done", "equals": true }, "next": "after_quest" },
+				{ "condition": { "type": "all", "conditions": [
+					{ "type": "objective", "quest": "pip_device", "objective": "examine_device", "done": true },
+					{ "type": "objective", "quest": "pip_device", "objective": "talk_pip", "done": true }
+				] }, "next": "report_device" },
+				{ "condition": { "type": "flag", "flag": "pip_device_helped", "equals": true }, "next": "waiting" },
+				{ "next": "first" }
+			]
+		},
+		"first": {
+			"lines": [
+				{ "text": "Careful! The measuring device is having one of its days.", "expression": "surprised" },
+				"It keeps telling me the same minute over and over.",
+				"Could you take a look? It is in my workshop."
+			],
+			"choices": [
+				{
+					"text": "Show me how it works.",
+					"next": "helped",
+					"effects": [
+						{ "type": "relationship", "character": "pip", "attr": "trust", "delta": 1 },
+						{ "type": "quest", "quest": "pip_device", "action": "start" },
+						{ "type": "quest", "quest": "pip_device", "action": "objective", "objective": "talk_pip" },
+						{ "type": "flag", "flag": "pip_device_helped", "value": true }
+					]
+				},
+				{
+					"text": "Later. I want to look around first.",
+					"next": "later",
+					"effects": [
+						{ "type": "relationship", "character": "pip", "attr": "trust", "delta": -1 }
+					]
+				}
+			]
+		},
+		"helped": {
+			"lines": [
+				{ "text": "Really? Oh, thank you! I knew I could count on you.", "expression": "happy" },
+				"Go and look at it. I will stay out of the way. I am very good at that."
+			],
+			"choices": []
+		},
+		"later": {
+			"lines": [
+				{ "text": "Right. Of course. I will just... keep the minute company.", "expression": "sad" },
+				"It is a very stubborn minute."
+			],
+			"choices": []
+		},
+		"waiting": {
+			"lines": [
+				{ "text": "Have you looked at the device yet?", "expression": "surprised" },
+				"It is on the bench in my workshop. Mind the spring."
+			],
+			"choices": []
+		},
+		"report_device": {
+			"lines": [
+				{ "text": "You actually looked! What did it say?", "expression": "surprised" },
+				{ "text": "One minute before noon. Always. That is not a broken clock. That is a message.", "expression": "afraid" },
+				"Thank you. I would not have asked anyone else."
+			],
+			"effects": [
+				{ "type": "quest", "quest": "pip_device", "action": "objective", "objective": "return_pip" }
+			],
+			"choices": []
+		},
+		"after_quest": {
+			"lines": [
+				{ "text": "The device still loses a minute, but it loses it with you now.", "expression": "happy" },
+				"That is almost friendship, I think."
+			],
+			"choices": []
+		}
+	}
+}

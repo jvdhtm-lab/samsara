@@ -1,0 +1,97 @@
+[gd_scene load_steps=14 format=3]
+
+[ext_resource type="Script" path="res://scripts/presentation/returning_tree.gd" id="1_trap"]
+[ext_resource type="Script" path="res://scripts/presentation/hollow_background.gd" id="2_bg"]
+[ext_resource type="PackedScene" path="res://scenes/characters/player.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://scenes/characters/character_base.tscn" id="4_char"]
+[ext_resource type="Resource" path="res://resources/characters/fern.tres" id="5_fern"]
+[ext_resource type="Script" path="res://scripts/presentation/trap_clue.gd" id="6_clue"]
+[ext_resource type="Script" path="res://scripts/presentation/loop_token.gd" id="7_token"]
+[ext_resource type="Script" path="res://scripts/presentation/trap_exit.gd" id="8_exit"]
+[ext_resource type="Script" path="res://scripts/presentation/door.gd" id="9_door"]
+[ext_resource type="Script" path="res://scripts/systems/spawn_point.gd" id="10_spawn"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="11_hud"]
+[ext_resource type="PackedScene" path="res://scenes/dialogue/dialogue_box.tscn" id="12_dlg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_prop"]
+size = Vector2(28, 28)
+
+[node name="Hollow" type="Node2D"]
+script = ExtResource("1_trap")
+location_id = &"hollow"
+bounds = Rect2(60, 150, 520, 150)
+trap_id = &"returning_tree"
+music_id = &"hollow"
+ambience_id = &"hollow_drip"
+
+[node name="Background" type="Node2D" parent="."]
+script = ExtResource("2_bg")
+
+[node name="Fern" parent="." instance=ExtResource("4_char")]
+position = Vector2(150, 214)
+data = ExtResource("5_fern")
+
+[node name="Player" parent="." instance=ExtResource("3_player")]
+position = Vector2(320, 262)
+
+[node name="SpawnDefault" type="Node2D" parent="."]
+position = Vector2(320, 262)
+script = ExtResource("10_spawn")
+
+[node name="SpawnFromCellar" type="Node2D" parent="."]
+position = Vector2(150, 262)
+script = ExtResource("10_spawn")
+spawn_id = &"from_cellar"
+
+[node name="TreeRoots" type="Area2D" parent="."]
+position = Vector2(430, 262)
+script = ExtResource("6_clue")
+trap_id = &"returning_tree"
+notice_flag = &"tree_noticed"
+rule_flag = &"returning_tree_rule_known"
+anomaly_id = "returning_tree"
+speaker_label = "The Tree"
+first_lines = PackedStringArray("A pale tree, older than the island it sits in.", "A leaf has fallen. It is already where it fell.", "There is a ring in the trunk that is not a ring. It is a loop.")
+rule_lines = PackedStringArray("The leaf is not returning. The tree is refusing to lose it.", "It will give the leaf back forever, unless you stop trying to carry it away.", "Now you understand what it wants.")
+
+[node name="Shape" type="CollisionShape2D" parent="TreeRoots"]
+shape = SubResource("RectangleShape2D_prop")
+
+[node name="FallenLeaf" type="Area2D" parent="."]
+position = Vector2(352, 280)
+script = ExtResource("7_token")
+trap_id = &"returning_tree"
+speaker_label = "The Returning Tree"
+prompt = "Pick up the leaf"
+lines_early = PackedStringArray("You pick up the leaf. It is dry and light.", "You look down. The leaf is back, exactly where it was.")
+lines_mid = PackedStringArray("You pick up the leaf again.", "The roots tighten a little further around the clearing.", "The leaf is back.")
+lines_late = PackedStringArray("You pick up the leaf. Your hand is tired.", "The clearing is almost dark now. The leaf is back.", "It will always be back. You carry it, and it returns.")
+
+[node name="Shape" type="CollisionShape2D" parent="FallenLeaf"]
+shape = SubResource("RectangleShape2D_prop")
+
+[node name="RootsEdge" type="Area2D" parent="."]
+position = Vector2(566, 250)
+script = ExtResource("8_exit")
+trap_id = &"returning_tree"
+required_flag = &"returning_tree_rule_known"
+resolution = &"left_it"
+set_flag = &"returning_tree_left"
+prompt = "Step back through the roots"
+
+[node name="Shape" type="CollisionShape2D" parent="RootsEdge"]
+shape = SubResource("RectangleShape2D_prop")
+
+[node name="ExitDoor" type="Area2D" parent="."]
+position = Vector2(86, 250)
+script = ExtResource("9_door")
+target_scene = "res://scenes/world/village.tscn"
+target_spawn = &"from_cellar"
+prompt_text = "Climb out"
+
+[node name="Shape" type="CollisionShape2D" parent="ExitDoor"]
+shape = SubResource("RectangleShape2D_prop")
+
+[node name="HUD" parent="." instance=ExtResource("11_hud")]
+
+[node name="DialogueBox" parent="." instance=ExtResource("12_dlg")]

@@ -1,0 +1,98 @@
+{
+	"id": "lumi_intro",
+	"speaker": "lumi",
+	"speaker_name": "Lumi",
+	"start": "start",
+	"nodes": {
+		"start": {
+			"routes": [
+				{ "condition": { "type": "flag", "flag": "lumi_story_done", "equals": true }, "next": "after_story" },
+				{ "condition": { "type": "all", "conditions": [
+					{ "type": "objective", "quest": "lumi_story", "objective": "read_plaque", "done": true },
+					{ "type": "objective", "quest": "lumi_story", "objective": "listen_with_lumi", "done": true }
+				] }, "next": "tell_lumi" },
+				{ "condition": { "type": "flag", "flag": "lumi_trusted", "equals": true }, "next": "return_trust" },
+				{ "next": "first_meeting" }
+			]
+		},
+		"first_meeting": {
+			"lines": [
+				{ "text": "Oh! Your lights are on again. I was starting to worry.", "expression": "happy" },
+				"The sky has been humming all morning. Can you hear it too?"
+			],
+			"choices": [
+				{
+					"text": "I hear it too. Are you alright?",
+					"next": "reassure",
+					"effects": [
+						{ "type": "relationship", "character": "lumi", "attr": "trust", "delta": 1 },
+						{ "type": "flag", "flag": "heard_humming", "value": true },
+						{ "type": "quest", "quest": "lumi_story", "action": "start" },
+						{ "type": "quest", "quest": "lumi_story", "action": "objective", "objective": "listen_with_lumi" }
+					]
+				},
+				{
+					"text": "You are imagining things.",
+					"next": "dismiss",
+					"effects": [
+						{ "type": "relationship", "character": "lumi", "attr": "suspicion", "delta": 1 }
+					]
+				}
+			]
+		},
+		"reassure": {
+			"lines": [
+				{ "text": "Thank you. It is easier when someone else hears it too.", "expression": "happy" },
+				"Then I will trust you with something else, later."
+			],
+			"next": "mark_trust"
+		},
+		"mark_trust": {
+			"effects": [
+				{ "type": "flag", "flag": "lumi_trusted", "value": true },
+				{ "type": "meta", "record_discovery": "lumi_trust" }
+			],
+			"routes": [
+				{ "next": "final_reassure" }
+			]
+		},
+		"final_reassure": {
+			"lines": [
+				{ "text": "There is a plaque by the old tree. Would you read it, and tell me what it says?", "expression": "happy" }
+			],
+			"choices": []
+		},
+		"dismiss": {
+			"lines": [
+				{ "text": "...Maybe.", "expression": "sad" },
+				"I hope you are right. I really do."
+			],
+			"choices": []
+		},
+		"return_trust": {
+			"lines": [
+				{ "text": "You came back. I knew you would.", "expression": "happy" },
+				"The plaque by the old tree keeps saying the same thing. Will you read it for me?"
+			],
+			"choices": []
+		},
+		"tell_lumi": {
+			"lines": [
+				{ "text": "You read it? What did it say?", "expression": "surprised" },
+				{ "text": "\"The tree has always been here.\" Over and over. That is not a plaque. That is a warning.", "expression": "afraid" },
+				{ "text": "Thank you for telling me the truth. I will remember that you did.", "expression": "happy" }
+			],
+			"effects": [
+				{ "type": "quest", "quest": "lumi_story", "action": "objective", "objective": "tell_lumi" }
+			],
+			"choices": []
+		},
+		"after_story": {
+			"lines": [
+				{ "text": "The sky still hums, but now we both know it. That helps.", "expression": "happy" },
+				"Stay close. If it ever stops, I want you to notice first."
+			],
+			"choices": []
+		}
+	}
+}

@@ -1,0 +1,10 @@
+# Godot import cache
+.godot/
+
+# Exported builds
+build/
+
+# OS cruft
+Thumbs.db
+Desktop.ini
+.DS_Store

@@ -1,0 +1,34 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/presentation/character_rig.gd" id="1_rig"]
+[ext_resource type="Script" path="res://scripts/presentation/character/shadow_layer.gd" id="2_shadow"]
+[ext_resource type="Script" path="res://scripts/presentation/character/back_accessory_layer.gd" id="3_back"]
+[ext_resource type="Script" path="res://scripts/presentation/character/body_layer.gd" id="4_body"]
+[ext_resource type="Script" path="res://scripts/presentation/character/face_layer.gd" id="5_face"]
+[ext_resource type="Script" path="res://scripts/presentation/character/eyes_layer.gd" id="6_eyes"]
+[ext_resource type="Script" path="res://scripts/presentation/character/mouth_layer.gd" id="7_mouth"]
+[ext_resource type="Script" path="res://scripts/presentation/character/marking_layer.gd" id="8_mark"]
+
+[node name="CharacterRig" type="Node2D"]
+script = ExtResource("1_rig")
+
+[node name="Shadow" type="Node2D" parent="."]
+script = ExtResource("2_shadow")
+
+[node name="BackAccessory" type="Node2D" parent="."]
+script = ExtResource("3_back")
+
+[node name="Body" type="Node2D" parent="."]
+script = ExtResource("4_body")
+
+[node name="Face" type="Node2D" parent="Body"]
+script = ExtResource("5_face")
+
+[node name="Eyes" type="Node2D" parent="Body"]
+script = ExtResource("6_eyes")
+
+[node name="Mouth" type="Node2D" parent="Body"]
+script = ExtResource("7_mouth")
+
+[node name="Marking" type="Node2D" parent="Body"]
+script = ExtResource("8_mark")

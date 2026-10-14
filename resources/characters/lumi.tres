@@ -1,0 +1,28 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/domain/character_data.gd" id="1_data"]
+
+[resource]
+script = ExtResource("1_data")
+id = &"lumi"
+display_name = "Lumi"
+role = "The Hopeful One"
+personality = "Gentle, optimistic, and quietly perceptive."
+dialogue_style = "Warm and wondering; notices when the world repeats itself."
+dialogue_id = &"lumi_intro"
+idle_motion = &"idle"
+uneven_smile = false
+silhouette = 0
+accessory = 0
+marking = 1
+eye_shape = 0
+body_color = Color(0.796, 0.717, 0.902, 1)
+shade_color = Color(0.619, 0.525, 0.769, 1)
+face_color = Color(0.953, 0.925, 1, 1)
+eye_color = Color(1, 0.722, 0.302, 1)
+accent_color = Color(1, 0.914, 0.659, 1)
+body_radius = 16.0
+palette_name = "Lavender / amber"
+footprint = 10.0
+model_id = "chars/minion-a01"
+model_yaw = 180.0

@@ -1,0 +1,18 @@
+{
+	"id": "fern_hollow",
+	"title": "What the Roots Remember",
+	"giver": "fern",
+	"summary": "Fern keeps the hollow beneath the village. Something down there refuses to be carried away. Learn its rule and settle it.",
+	"objectives": [
+		{ "id": "meet_fern", "description": "Meet Fern in the hollow" },
+		{ "id": "discover_tree", "description": "Understand why the leaf always returns" },
+		{ "id": "resolve_tree", "description": "Settle the returning tree" }
+	],
+	"rewards": [
+		{ "type": "relationship", "character": "fern", "attr": "trust", "delta": 1 },
+		{ "type": "meta", "unlock_ability": "memory_echo" }
+	],
+	"consequences": [
+		{ "type": "flag", "flag": "fern_hollow_done", "value": true }
+	]
+}

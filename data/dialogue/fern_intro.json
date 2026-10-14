@@ -1,0 +1,134 @@
+{
+	"id": "fern_intro",
+	"speaker": "fern",
+	"speaker_name": "Fern",
+	"start": "start",
+	"nodes": {
+		"start": {
+			"routes": [
+				{ "condition": { "type": "flag", "flag": "fern_hollow_done", "equals": true }, "next": "after" },
+				{ "condition": { "type": "objective", "quest": "fern_hollow", "objective": "resolve_tree", "done": true }, "next": "after" },
+				{ "condition": { "type": "all", "conditions": [
+					{ "type": "flag", "flag": "returning_tree_rule_known", "equals": true },
+					{ "type": "flag", "flag": "meta_completed_before", "equals": true }
+				] }, "next": "let_stay_remembered" },
+				{ "condition": { "type": "flag", "flag": "returning_tree_rule_known", "equals": true }, "next": "let_stay" },
+				{ "condition": { "type": "flag", "flag": "meta_completed_before", "equals": true }, "next": "first_again" },
+				{ "next": "first" }
+			]
+		},
+		"first": {
+			"lines": [
+				{ "text": "...You came down. Most never find the door.", "expression": "surprised" },
+				"I am Fern. I keep the roots from wandering off. Mostly, I fail.",
+				{ "text": "There is a tree here that gives everything back. Pick up a leaf. You will see.", "expression": "sad" }
+			],
+			"effects": [
+				{ "type": "quest", "quest": "fern_hollow", "action": "start" },
+				{ "type": "quest", "quest": "fern_hollow", "action": "objective", "objective": "meet_fern" },
+				{ "type": "relationship", "character": "fern", "attr": "trust", "delta": 1 },
+				{ "type": "meta", "record_discovery": "fern_met" }
+			],
+			"choices": [
+				{ "text": "Why can't you leave it alone?", "next": "why" },
+				{ "text": "I will look at the tree.", "next": "agree" }
+			]
+		},
+		"first_again": {
+			"lines": [
+				{ "text": "You have been here before. The tree remembers you even if you do not.", "expression": "uncanny" },
+				"I keep the roots from wandering. You keep coming back to them.",
+				{ "text": "Pick up a leaf. It will be back before you finish turning around.", "expression": "sad" }
+			],
+			"effects": [
+				{ "type": "quest", "quest": "fern_hollow", "action": "start" },
+				{ "type": "quest", "quest": "fern_hollow", "action": "objective", "objective": "meet_fern" },
+				{ "type": "relationship", "character": "fern", "attr": "trust", "delta": 1 },
+				{ "type": "meta", "record_discovery": "fern_met" },
+				{ "type": "meta", "record_anomaly": "fern_knows" }
+			],
+			"choices": [
+				{ "text": "Why can't you leave it alone?", "next": "why" },
+				{ "text": "I will look at the tree.", "next": "agree" }
+			]
+		},
+		"why": {
+			"lines": [
+				"Because it is mine to keep, and keeping is not the same as carrying.",
+				{ "text": "Go on. Take the leaf. Learn what it wants.", "expression": "neutral" }
+			],
+			"choices": []
+		},
+		"agree": {
+			"lines": [
+				{ "text": "Good. I will be here. I am always here.", "expression": "neutral" }
+			],
+			"choices": []
+		},
+		"let_stay": {
+			"lines": [
+				{ "text": "You understand it now. The leaf does not want to be carried.", "expression": "happy" },
+				"It wants only to be left where it falls, again and again, until someone lets it.",
+				"You could leave through the roots. Or you could let it stay."
+			],
+			"choices": [
+				{
+					"text": "Let it stay.",
+					"next": "gave_back",
+					"effects": [
+						{ "type": "trap", "trap": "returning_tree", "action": "resolve", "resolution": "gave_back" },
+						{ "type": "relationship", "character": "fern", "attr": "trust", "delta": 1 },
+						{ "type": "flag", "flag": "returning_tree_gave_back", "value": true }
+					]
+				},
+				{ "text": "Not yet.", "next": "not_yet" }
+			]
+		},
+		"let_stay_remembered": {
+			"lines": [
+				{ "text": "You know this tree already. You knew it in some other turning of the world.", "expression": "uncanny" },
+				"It does not hold that against you. It only asks the same thing again.",
+				"Leave it through the roots, or let it stay."
+			],
+			"choices": [
+				{
+					"text": "Let it stay.",
+					"next": "gave_back_remembered",
+					"effects": [
+						{ "type": "trap", "trap": "returning_tree", "action": "resolve", "resolution": "gave_back" },
+						{ "type": "relationship", "character": "fern", "attr": "trust", "delta": 1 },
+						{ "type": "flag", "flag": "returning_tree_gave_back", "value": true }
+					]
+				},
+				{ "text": "Not yet.", "next": "not_yet" }
+			]
+		},
+		"gave_back": {
+			"lines": [
+				{ "text": "The leaf settles. The roots stop reaching.", "expression": "happy" },
+				"Thank you. It will be quiet for a while now."
+			],
+			"choices": []
+		},
+		"gave_back_remembered": {
+			"lines": [
+				{ "text": "The roots settle as if they had been waiting for you specifically.", "expression": "happy" },
+				"Some knots only come loose when someone remembers they were ever tied."
+			],
+			"choices": []
+		},
+		"not_yet": {
+			"lines": [
+				{ "text": "Take your time. The tree certainly will.", "expression": "neutral" }
+			],
+			"choices": []
+		},
+		"after": {
+			"lines": [
+				{ "text": "The leaf has not come back. That is the first quiet I have had in a long while.", "expression": "happy" },
+				"Whatever you did, keep it. I will."
+			],
+			"choices": []
+		}
+	}
+}
